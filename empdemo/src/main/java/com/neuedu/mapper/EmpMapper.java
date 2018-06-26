@@ -35,6 +35,13 @@ public interface EmpMapper {
     int deleteEmpByIds(int[] ids);
 
     /**
+     * 根据部门的id来删除员工
+     * @param dept_ids
+     * @return影响行数
+     */
+    int deleteEmpByDeptId(int[] dept_ids);
+
+    /**
      * 添加Emp
      * @param emp
      * @return
