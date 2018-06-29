@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>addEmp</title>
+    <title>login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/r/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/r/css/style.css">
 </head>
@@ -25,17 +25,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-2 col-sm-4">
                         <button type="button" class="btn btn-primary login">登录</button>
+                        <button type="button" class="btn btn-primary regist">注册</button>
                     </div>
                 </div>
             </form>
@@ -46,7 +38,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/r/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $(".login").click(function () {
+            $(".login").click(function(){
                 var username = $("#username").val();
                 var password = $("#password").val();
                 //使用ajax将用户名和密码传到后台去校验
@@ -69,6 +61,10 @@
                         }
                     })
                 }
+            })
+            $(".regist").click(function () {
+                var path = "${pageContext.request.contextPath}/user/registView";
+                location.href = path;
             })
         })
     </script>

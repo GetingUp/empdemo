@@ -4,6 +4,6 @@
     <title>404</title>
 </head>
 <body>
-    <img src="${pageContext.request.contextPath}/r/img/01.gif">
+    <img src="${pageContext.request.contextPath}/r/img/01.gif" width="100%" height="100%">
 </body>
 </html>

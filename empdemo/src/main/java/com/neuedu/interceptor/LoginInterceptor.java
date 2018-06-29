@@ -1,12 +1,15 @@
 package com.neuedu.interceptor;
 
 import com.neuedu.entity.User;
+import com.neuedu.util.CookieUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -21,17 +24,28 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        //免登录功能
+        //做一个免登录功能
         HttpSession httpSession = httpServletRequest.getSession();
         User user = (User) httpSession.getAttribute("user");
         if(user == null){
             //httpServletRequest.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(httpServletRequest,httpServletResponse);
-            //获得项目名
-            String contextPath = httpServletRequest.getContextPath();
-            httpServletResponse.sendRedirect( contextPath +"/user/loginView");
-            return false;
+            //获得cookie
+            Cookie[] cookies = httpServletRequest.getCookies();
+            Map<String,Cookie> cookieMap = CookieUtil.getCookieMap(cookies);
+            Cookie userCookie = cookieMap.get("username");
+            if(userCookie == null){
+                String contextPath = httpServletRequest.getContextPath();
+                httpServletResponse.sendRedirect( contextPath +"/user/loginView");
+                return false;
+            }else {
+                String username = userCookie.getValue();
+                User user1 = new User();
+                user1.setUsername(username);
+                httpSession.setAttribute("user",user1);
+                return true;
+            }
         }
-        return true;
+            return true;
     }
 
 

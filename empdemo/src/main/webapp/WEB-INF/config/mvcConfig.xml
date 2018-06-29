@@ -43,6 +43,7 @@
             <mvc:mapping path="/**"/>
             <!--不拦截哪些-->
             <mvc:exclude-mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/r/**"/>
             <!--告诉spring拦截器的类是哪个-->
             <bean class="com.neuedu.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
